@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
 import 'package:characters_app/data/models/characters.dart';
+import 'package:characters_app/data/web_services/characters_web_services.dart';
 import 'package:flutter/cupertino.dart';
 // import 'package:meta/meta.dart';
 
@@ -13,16 +14,16 @@ import 'package:characters_app/data/repository/characters_repository.dart';
 part 'characters_state.dart';
 
 class CharactersCubit extends Cubit<CharactersState> {
-  final CharactersRepository charactersRepository;
-  late List<Results> characters;
-  CharactersCubit(
-    this.charactersRepository,
-  ) : super(CharactersInitial());
+  // final CharactersRepository charactersRepository;
+  Character? character;
+  CharactersCubit(): super(CharactersInitial());
   List<Results> getAllCharacters() {
-    charactersRepository.getAllCharacters().then((characters) {
-      emit(CharactersLoaded(characters.cast<Results>()));
-      this.characters = characters;
+    CharactersRepository(CharactersWebServices())
+        .getAllCharacters()
+        .then((response) {
+      emit(CharactersLoaded(response.results!));
+      character = response;
     });
-    return characters;
+    return character!.results!;
   }
 }

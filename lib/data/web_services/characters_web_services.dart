@@ -3,10 +3,10 @@
 import 'package:characters_app/constants/strings.dart';
 import 'package:dio/dio.dart';
 
-import '../models/characters.dart';
+// import '../models/characters.dart';
 
 class CharactersWebServices {
-  static Dio? dio;
+   Dio? dio;
   CharactersWebServices() {
     BaseOptions options = BaseOptions(
       baseUrl: baseUrl,
@@ -19,11 +19,11 @@ class CharactersWebServices {
     getAllCharacters();
   }
 
-  static Future getAllCharacters() async {
+   Future getAllCharacters() async {
     try {
       Response response = await dio!.get('character');
       // ignore: avoid_print
-      print(response.data.toString());
+      // print(response.data.toString());
       return response.data;
     } catch (e) {
       print(e.toString());

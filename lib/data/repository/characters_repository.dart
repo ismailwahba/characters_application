@@ -9,8 +9,8 @@ import '../models/characters.dart';
 class CharactersRepository {
   final CharactersWebServices charactersWebServices;
   CharactersRepository(this.charactersWebServices);
-  Future<List<Results>> getAllCharacters() async {
+  Future<Character> getAllCharacters() async {
     final character = await charactersWebServices.getAllCharacters();
-    return character.map((character) => Character.fromJson(character.data));
+    return Character.fromJson(character);
   }
 }

@@ -66,18 +66,27 @@ class _CharactersScreenState extends State<CharactersScreen> {
         itemCount: allCharacters.length,
         itemBuilder: (ctx, index) {
           return Container(
-              decoration: BoxDecoration(
-                color: MyColors.myWhite,
-                borderRadius: BorderRadius.circular(8),
-              ),
-              width: double.infinity,
-              margin: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
-              padding: EdgeInsetsDirectional.fromSTEB(4, 4, 4, 4),
-              child: GridTile(
-                  child: Container(
-                      color: MyColors.myGrey,
-                      child: Image.network(
-                          "${allCharacters[index].image!.isNotEmpty ? FadeInImage.assetNetwork(width: double.infinity, height: double.infinity, fit: BoxFit.cover, placeholder: 'assests/images/loading.gif', image: 'allCharacters[index].image') : Image.asset("assets/iages/placeholder.jpg")}"))));
+            decoration: BoxDecoration(
+              color: MyColors.myWhite,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            width: double.infinity,
+            margin: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
+            padding: EdgeInsetsDirectional.fromSTEB(4, 4, 4, 4),
+            child: GridTile(
+              child: Container(
+                  color: MyColors.myGrey,
+                  child: allCharacters[index].image!.isNotEmpty
+                      ? FadeInImage.assetNetwork(
+                          width: double.infinity,
+                          height: double.infinity,
+                          fit: BoxFit.cover,
+                          placeholder: 'assests/images/loading.gif',
+                          image: allCharacters[index].image!,
+                        )
+                      : Image.asset("assets/iages/placeholder.jpg"),),
+            ),
+          );
         });
   }
 
